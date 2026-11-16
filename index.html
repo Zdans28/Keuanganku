@@ -44,7 +44,7 @@ const add=(s,n)=>{const d=new Date(s+'T12:00');d.setDate(d.getDate()+n);return i
 const fd=d=>new Date(d+'T12:00').toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'});
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600)};
 const cache=()=>localStorage.c=JSON.stringify({S,TX}),empty=m=>`<div class="card empty">${m}</div>`;
-async function api(o){const b=new URLSearchParams({payload:JSON.stringify({pin,...o})}),r=await fetch(API,{method:'POST',body:b}),j=await r.json();if(!j.ok)throw new Error(j.error);return j}
+async function api(o){const r=await fetch(API,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({pin,...o})}),j=await r.json();if(!j.ok)throw new Error(j.error);return j}
 function range(){const t=today(),d=new Date(t+'T12:00');if(per==='hari')return[t,t];
  if(per==='bulan')return[t.slice(0,8)+'01',iso(new Date(d.getFullYear(),d.getMonth()+1,0))];return[cf||t,ct||t]}
 const inR=(x,a,b)=>x.d>=a&&x.d<=b,sum=(l,t)=>l.filter(x=>x.t===t).reduce((s,x)=>s+x.n,0),grp=k=>k.replace(/\s*week\s*\d+$/i,'');
